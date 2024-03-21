@@ -1,3 +1,5 @@
+const { describe } = require("mocha");
+
 describe('Swiper Gallery Test', function () {
   it('Checks if second slide contains "United Kingdom"', function () {
     cy.visit('http://localhost:3000');
@@ -12,6 +14,19 @@ describe('Swiper Gallery Test', function () {
     cy.get('.swiper-button-next').click();
     cy.wait(2000);
     cy.get('.swiper-button-next').click({ force: true });
+    cy.wait(2000);
+    cy.get('.swiper-slide-active').should('contain', 'Paris');
+  });
+});
+
+describe('Check if gallery is showing properly', function() {
+  it('Open gallery', function() {
+    cy.visit('http//localhost:3000');
+    cy.get('.swiper-slide-active').should('contain', 'Rome');
+    cy.get('.swiper-button-next').click();
+    cy.wait(2000);
+    cy.get('.swiper-slide-active').should('contain', 'United Kingdom');
+    cy.get('.swiper-button-next').click();
     cy.wait(2000);
     cy.get('.swiper-slide-active').should('contain', 'Paris');
   });
